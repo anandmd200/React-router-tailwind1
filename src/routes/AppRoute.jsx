@@ -14,7 +14,7 @@ const AppRoute = () => {
       <Route element={<ProtectedRoute />}>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
-        <Route path="item/:itemId" element={<Item />} />
+        <Route path="item" element={<Item />} />
       </Route>
     </Routes>
   );
