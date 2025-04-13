@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
     console.log("Logging in with:", { email, password });
+    const creadientials = JSON.stringify({ email, password });
+    console.log("Crendientials: ", typeof creadientials, creadientials);
     // Add your authentication logic here
+    if (email != "" && password != "") {
+      localStorage.setItem("token", creadientials);
+      navigate("/dashboard");
+    }
   };
+
+  useEffect(() => {
+    const isTokenAvailabe = localStorage.getItem("token");
+    if (isTokenAvailabe) {
+      navigate("/dashboard");
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

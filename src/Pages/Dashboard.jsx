@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import Header from "../component/Header";
 
 const Dashboard = () => {
   return (
@@ -7,15 +8,20 @@ const Dashboard = () => {
       <aside className="w-64 bg-white shadow-md hidden md:block">
         <div className="p-6 font-bold text-xl border-b">Dashboard</div>
         <nav className="p-4 space-y-2">
-          <a href="#" className="block px-4 py-2 rounded hover:bg-gray-200">Home</a>
-          <a href="#" className="block px-4 py-2 rounded hover:bg-gray-200">Analytics</a>
-          <a href="#" className="block px-4 py-2 rounded hover:bg-gray-200">Settings</a>
+          <a href="#" className="block px-4 py-2 rounded hover:bg-gray-200">
+            Home
+          </a>
+          <a href="#" className="block px-4 py-2 rounded hover:bg-gray-200">
+            Analytics
+          </a>
+          <a href="#" className="block px-4 py-2 rounded hover:bg-gray-200">
+            Settings
+          </a>
         </nav>
       </aside>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        {/* Header */}
         <header className="bg-white shadow p-4 flex justify-between items-center">
           <h1 className="text-2xl font-semibold">Welcome Back!</h1>
           <div className="flex items-center space-x-4">
