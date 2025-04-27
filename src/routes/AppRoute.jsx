@@ -5,6 +5,7 @@ import Dashboard from "../Pages/Dashboard";
 import ProtectedRoute from "./ProtectedRoute";
 import Profile from "../Pages/Profile";
 import Item from "../Pages/Item";
+import Profit from "../component/Profit";
 
 const AppRoute = () => {
   return (
@@ -12,7 +13,7 @@ const AppRoute = () => {
       <Route path="/" element={<Navigate to="login" />} />
       <Route path="login" element={<Login />} />
       <Route element={<ProtectedRoute />}>
-        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="dashboard" element={<Dashboard />}></Route>
         <Route path="profile" element={<Profile />} />
         <Route path="item" element={<Item />} />
       </Route>

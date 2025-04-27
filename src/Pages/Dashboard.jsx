@@ -1,7 +1,50 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import Header from "../component/Header";
+import { Outlet, useNavigate } from "react-router";
+import useOnlineStatus from "../customhooks/useOnlineStatus";
+import Profit from "../component/Profit";
+import { ChannelContext } from "../App";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const { userInfo } = useContext(ChannelContext);
+
+  console.log(userInfo);
+
+  const isonline = useOnlineStatus();
+
+  console.log("Is userOnline", isonline);
+
+  // const { userInfo, notification } = useContext(UserRoleContext);
+
+  // console.log(userInfo, notification);
+
+  const handleLogout = () => {
+    const isConfirmed = window.confirm(
+      "Are you sure want to logout from the app?"
+    );
+    if (isConfirmed) {
+      localStorage.clear();
+      navigate("/login");
+    }
+  };
+
+  useEffect(() => {
+    console.log("Initializing phase .....mounting phase");
+    getDataformRandomAPI();
+
+    return () => {
+      console.log("Cleanup calling.... unmounting phase");
+    };
+  }, []);
+
+  const getDataformRandomAPI = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await response.json();
+
+    console.log(data);
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -17,6 +60,20 @@ const Dashboard = () => {
           <a href="#" className="block px-4 py-2 rounded hover:bg-gray-200">
             Settings
           </a>
+
+          <button
+            onClick={() => navigate("")}
+            className="block px-4 py-2 rounded hover:bg-gray-200"
+          >
+            Logout
+          </button>
+
+          <button
+            onClick={handleLogout}
+            className="block px-4 py-2 rounded hover:bg-gray-200"
+          >
+            Logout
+          </button>
         </nav>
       </aside>
 
@@ -25,7 +82,14 @@ const Dashboard = () => {
         <header className="bg-white shadow p-4 flex justify-between items-center">
           <h1 className="text-2xl font-semibold">Welcome Back!</h1>
           <div className="flex items-center space-x-4">
-            <span className="text-gray-600">John Doe</span>
+            <span
+              className={`h-3 w-3 rounded-full ${
+                isonline ? "bg-green-500" : "bg-red-500"
+              }`}
+            ></span>
+            <span>{isonline ? "online" : "offline"}</span>
+            <span className="text-gray-600">{userInfo?.name}</span>
+            <span className="text-gray-600 ">{userInfo?.role}</span>
             <img
               src="https://i.pravatar.cc/40"
               alt="User Avatar"
@@ -52,6 +116,8 @@ const Dashboard = () => {
               <h2 className="text-lg font-semibold mb-2">New Orders</h2>
               <p className="text-3xl font-bold">320</p>
             </div>
+
+            <Profit />
           </div>
         </main>
       </div>
