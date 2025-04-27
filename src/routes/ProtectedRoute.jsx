@@ -10,6 +10,7 @@ const ProtectedRoute = ({ childern }) => {
 
   return (
     <>
+
       {childern}
       <Outlet />
     </>

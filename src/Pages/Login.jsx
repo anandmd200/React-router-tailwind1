@@ -14,14 +14,14 @@ const Login = () => {
     // Add your authentication logic here
     if (email != "" && password != "") {
       localStorage.setItem("token", creadientials);
-      navigate("/dashboard");
+      navigate("/home");
     }
   };
 
   useEffect(() => {
     const isTokenAvailabe = localStorage.getItem("token");
     if (isTokenAvailabe) {
-      navigate("/dashboard");
+      navigate("/home");
     }
   }, []);
 
